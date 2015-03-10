@@ -1,5 +1,15 @@
+header {
+    padding: 60px 0;
+    font-size: 27px;
+}
+header .title {
+    width: 217px;
+    margin: 0 auto;
+}
+
 .background {
     background-image: url("background.jpg");
+    background-size: contain;
     position: fixed;
     left: 0;
     right: 0;
@@ -15,16 +25,32 @@
     -ms-filter: blur(20px);
     filter: blur(20px);
 }
+.menu {
+    position: absolute;
 
+}
 .content {
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     z-index: 9999;
     margin-left: 20px;
     margin-right: 20px;
+    height: 150%;
 }
-
+.tasks {
+    border-radius: 0 0 13px 13px;
+}
+.tasks tr:last-of-type td {
+    padding-bottom: 20px !important;
+}
+.task td:last-of-type {
+    border-left: 1px solid #DDDDDD;
+    color: #b0b0b0;
+}
+.project {
+    margin-bottom: 30px;
+}
 .project-header {
     padding: 6px;
 }
@@ -70,5 +96,9 @@
     height: 100%;
 }
 .task-controls {
-    width: 20px !important;
+    width: 95px !important;
+}
+.add-project-container {
+    margin: 0 auto;
+    width: 117px;
 }
