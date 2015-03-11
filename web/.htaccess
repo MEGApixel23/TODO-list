@@ -1,0 +1,16 @@
+RewriteEngine on
+
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+
+# Не позволяет просматривать содержимое директориий
+Options All -Indexes
+
+# не позволяет просматривать файлы, указанных форматов
+<FilesMatch ".(htaccess|git.*|ini|phps|fla|psd|log|sh|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>

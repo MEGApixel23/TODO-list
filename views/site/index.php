@@ -1,51 +1,98 @@
 <?php
-/* @var $this yii\web\View */
+
+/**
+ * @var $projects \app\models\Project[]
+ * @var $this yii\web\View
+ */
+
+use \yii\helpers\Html;
+use \yii\helpers\Url;
+
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+<? for ($i=0; $i<count($projects); $i++) : ?>
+    <div class="row">
+        <div data-class="project"
+             class="project col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3"
+             data-id="<?=$projects[$i]->id?>">
+            <div class="project-header bg-primary">
+                <div class="glyphicon glyphicon-list-alt project-icon"></div>
+                <div class="project-title"><?=$projects[$i]->title?></div>
+                <div class="project-controls pull-right">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a> |
+                    <a href="<?=Url::to(['/project', 'id' => $projects[$i]->id])?>" class="delete-project">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="project-creator">
+                <div class="add-task">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-plus add-task-icon"></span>
+                    </a>
+                </div>
+                <div class="task-input">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-success" type="button">Add Task</button>
+                            </span>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="tasks">
+                <div class="fields"></div>
+                <table class="tasks-table table">
+                    <? for ($j=0; $j<count($projects[$i]->tasks); $j++) : ?>
+                        <?php
+                        $task = $projects[$i]->tasks[$j];
+                        ?>
+                        <tr class="task">
+                            <td class="checkbox-container">
+                                <?=Html::activeCheckbox($task, 'done', [
+                                    'label' => null
+                                ])?>
+                            </td>
+                            <td>
+                                <?=$task->text?>
+                            </td>
+                            <td class="task-controls">
+                                <a href="#">
+                                        <span class="glyphicon
+                                         glyphicon-resize-vertical"></span>
+                                </a> |
+                                <a href="#">
+                                        <span class="glyphicon
+                                        glyphicon-pencil"></span>
+                                </a> |
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?  endfor ?>
+                </table>
             </div>
         </div>
-
     </div>
-</div>
+<? endfor ?>
+
+<script>
+    $(document).ready(function() {
+        $('.delete-project').click(function(e) {
+            var url = $(this).attr('href');
+
+            e.preventDefault();
+
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                complete: function(res) {
+                    console.log(res);
+                }
+            });
+        });
+    });
+</script>

@@ -9,6 +9,7 @@ use app\assets\AppAsset;
 /* @var $content string */
 
 AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,7 +28,7 @@ AppAsset::register($this);
 
 <?php $this->beginBody() ?>
 <div class="background"></div>
-<div class="content ">
+<div class="content">
 
     <header>
         <div class="title">Simple TODO list</div>
@@ -41,67 +42,7 @@ AppAsset::register($this);
         </ul>
     </div>
 
-    <? for ($i=0; $i<5; $i++) : ?>
-        <div class="row">
-            <div class="project col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
-                <div class="project-header bg-primary">
-                    <div class="glyphicon glyphicon-list-alt project-icon"></div>
-                    <div class="project-title">Название проекта</div>
-                    <div class="project-controls pull-right">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </a> |
-                        <a href="#">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-creator">
-                    <div class="add-task">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-plus add-task-icon"></span>
-                        </a>
-                    </div>
-                    <div class="task-input">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="button">Add Task</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tasks">
-                    <div class="fields"></div>
-                    <table class="tasks-table table">
-                        <? for ($j=0; $j<2; $j++) : ?>
-                            <tr class="task">
-                                <td class="checkbox-container">
-                                    <input type="checkbox">
-                                </td>
-                                <td>
-                                    To do TODO list
-                                </td>
-                                <td class="task-controls">
-                                    <a href="#">
-                                        <span class="glyphicon
-                                         glyphicon-resize-vertical"></span>
-                                    </a> |
-                                    <a href="#">
-                                        <span class="glyphicon
-                                        glyphicon-pencil"></span>
-                                    </a> |
-                                    <a href="#">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?  endfor ?>
-                    </table>
-                </div>
-            </div>
-        </div>
-    <? endfor ?>
+    <?=$content?>
 
     <div class="row">
         <div class="add-project-container">

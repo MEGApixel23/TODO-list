@@ -37,6 +37,17 @@ $config = [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => true,
+            'rules' => [
+                ['class' => '\yii\rest\UrlRule', 'controller' => 'project'],
+                '<controller:\w+>/<id:\d+>' => '<controller>/index',
+                '<controller:\w+>' => '<controller>/index',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>'
+            ],
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
