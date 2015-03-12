@@ -22,7 +22,7 @@ $this->title = 'My Yii Application';
                     <a href="#">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a> |
-                    <a href="<?=Url::to(['/project', 'id' => $projects[$i]->id])?>" class="delete-project">
+                    <a href="<?=Url::to(["/project/{$projects[$i]->id}"])?>" class="delete-project">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </div>
