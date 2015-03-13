@@ -13,12 +13,14 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" ng-app>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Roboto&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
 
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
@@ -43,12 +45,6 @@ AppAsset::register($this);
     </div>
 
     <?=$content?>
-
-    <div class="row">
-        <div class="add-project-container">
-            <button class="add-project btn btn-primary">Add TODO list</button>
-        </div>
-    </div>
 
     <footer>Ruby garage</footer>
 </div>

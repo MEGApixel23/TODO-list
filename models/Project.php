@@ -4,6 +4,9 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveQuery;
+use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 
 /**
  * This is the model class for table "projects".
@@ -18,7 +21,7 @@ use yii\db\ActiveQuery;
  *
  * @property Task[] $tasks
  */
-class Project extends \yii\db\ActiveRecord
+class Project extends \yii\db\ActiveRecord implements Linkable
 {
     /**
      * @inheritdoc
@@ -74,5 +77,20 @@ class Project extends \yii\db\ActiveRecord
     public static function find()
     {
         return parent::find()->andWhere(['deleted' => 0]);
+    }
+
+    public function beforeValidate()
+    {
+        if (!$this->user_id)
+            $this->user_id = 0;
+
+        return parent::beforeValidate();
+    }
+
+    public function getLinks()
+    {
+        return [
+            Link::REL_SELF => Url::to(['project/view', 'id' => $this->id], true),
+        ];
     }
 }

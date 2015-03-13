@@ -45,12 +45,13 @@ $config = [
             'rules' => [
                 [
                     'class' => yii\rest\UrlRule::className(),
-                    'controller' => ['project']
+                    'controller' => ['project'],
+                    'pluralize' => false
                 ],
-                /*'<controller:\w+>/<id:\d+>' => '<controller>/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/index',
                 '<controller:\w+>' => '<controller>/index',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '/' => 'site/index'*/
+                '/' => 'site/index'
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),

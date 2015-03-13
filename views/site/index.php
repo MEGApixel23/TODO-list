@@ -10,19 +10,19 @@ use \yii\helpers\Url;
 
 $this->title = 'My Yii Application';
 ?>
-<? for ($i=0; $i<count($projects); $i++) : ?>
-    <div class="row">
+<div ng-controller="Projects">
+    <div class="row" ng-repeat="project in projects">
         <div data-class="project"
              class="project col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3"
-             data-id="<?=$projects[$i]->id?>">
+             data-id="{{projectId}}">
             <div class="project-header bg-primary">
                 <div class="glyphicon glyphicon-list-alt project-icon"></div>
-                <div class="project-title"><?=$projects[$i]->title?></div>
+                <div class="project-title">{{project.title}}</div>
                 <div class="project-controls pull-right">
                     <a href="#">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a> |
-                    <a href="<?=Url::to(["/project/{$projects[$i]->id}"])?>" class="delete-project">
+                    <a href="{{project._links.self.href}}" class="delete-project">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </div>
@@ -45,54 +45,53 @@ $this->title = 'My Yii Application';
             <div class="tasks">
                 <div class="fields"></div>
                 <table class="tasks-table table">
-                    <? for ($j=0; $j<count($projects[$i]->tasks); $j++) : ?>
-                        <?php
-                        $task = $projects[$i]->tasks[$j];
-                        ?>
-                        <tr class="task">
-                            <td class="checkbox-container">
-                                <?=Html::activeCheckbox($task, 'done', [
-                                    'label' => null
-                                ])?>
-                            </td>
-                            <td>
-                                <?=$task->text?>
-                            </td>
-                            <td class="task-controls">
-                                <a href="#">
-                                        <span class="glyphicon
-                                         glyphicon-resize-vertical"></span>
-                                </a> |
-                                <a href="#">
-                                        <span class="glyphicon
-                                        glyphicon-pencil"></span>
-                                </a> |
-                                <a href="#">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
-                            </td>
-                        </tr>
-                    <?  endfor ?>
+                    <tr class="task">
+                        <td class="checkbox-container">
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            {{task.text}}
+                        </td>
+                        <td class="task-controls">
+                            <a href="#">
+                                    <span class="glyphicon
+                                     glyphicon-resize-vertical"></span>
+                            </a> |
+                            <a href="#">
+                                    <span class="glyphicon
+                                    glyphicon-pencil"></span>
+                            </a> |
+                            <a href="#">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
     </div>
-<? endfor ?>
+
+    <div class="row">
+        <div class="add-project-container">
+            <button ng-click="add()" data-url="<?=Url::to(['/project'])?>" class="add-project btn btn-primary">Add TODO list</button>
+        </div>
+    </div>
+</div>
 
 <script>
-    $(document).ready(function() {
-        $('.delete-project').click(function(e) {
-            var url = $(this).attr('href');
+    function Projects($scope, $http) {
+        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-            e.preventDefault();
-
-            $.ajax({
-                url: url,
-                method: 'DELETE',
-                complete: function(res) {
-                    console.log(res);
-                }
+        $http.get('/project')
+            .success(function(data, status, headers, config) {
+                $scope.projects = data;
             });
-        });
-    });
+
+        $scope.add = function() {
+            $http.post('/project', $.param({title: 'new'}))
+                .success(function(data, status, headers, config) {
+                    $scope.projects.push(data);
+                });
+        }
+    }
 </script>
