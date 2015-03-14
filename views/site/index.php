@@ -22,7 +22,10 @@ $this->title = 'My Yii Application';
                     <a href="#">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a> |
-                    <a href="{{project._links.self.href}}" class="delete-project">
+                    <a href="#"
+                       ng-click="delete(project)"
+                       onclick="return false;"
+                       class="delete-project">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 </div>
@@ -35,17 +38,22 @@ $this->title = 'My Yii Application';
                 </div>
                 <div class="task-input">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                            <span class="input-group-btn">
-                                <button class="btn btn-success" type="button">Add Task</button>
-                            </span>
+                        <input type="text" class="form-control"
+                               ng-model="project.newTaskText">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success"
+                                    ng-click="addTask(project)"
+                                    type="button">
+                                Add Task
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>
             <div class="tasks">
                 <div class="fields"></div>
                 <table class="tasks-table table">
-                    <tr class="task">
+                    <tr class="task" ng-repeat="task in project.tasks">
                         <td class="checkbox-container">
                             <input type="checkbox">
                         </td>
@@ -78,20 +86,4 @@ $this->title = 'My Yii Application';
     </div>
 </div>
 
-<script>
-    function Projects($scope, $http) {
-        $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-        $http.get('/project')
-            .success(function(data, status, headers, config) {
-                $scope.projects = data;
-            });
-
-        $scope.add = function() {
-            $http.post('/project', $.param({title: 'new'}))
-                .success(function(data, status, headers, config) {
-                    $scope.projects.push(data);
-                });
-        }
-    }
-</script>
+<? $this->registerJsFile('/js/app/app.js')?>

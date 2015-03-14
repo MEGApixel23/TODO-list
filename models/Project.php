@@ -70,6 +70,11 @@ class Project extends \yii\db\ActiveRecord implements Linkable
         ]);
     }
 
+    public function extraFields()
+    {
+        return ['tasks'];
+    }
+
     /**
      * @inheritdoc
      * @return ActiveQuery the newly created [[ActiveQuery]] instance.

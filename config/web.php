@@ -45,7 +45,7 @@ $config = [
             'rules' => [
                 [
                     'class' => yii\rest\UrlRule::className(),
-                    'controller' => ['project'],
+                    'controller' => ['project', 'task'],
                     'pluralize' => false
                 ],
                 '<controller:\w+>/<id:\d+>' => '<controller>/index',

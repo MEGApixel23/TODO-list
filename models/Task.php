@@ -66,4 +66,12 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Project::className(), ['id' => 'project_id']);
     }
+
+    public function beforeValidate()
+    {
+        if (!$this->user_id)
+            $this->user_id = 0;
+
+        return parent::beforeValidate();
+    }
 }
