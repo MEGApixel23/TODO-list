@@ -53,27 +53,29 @@ $this->title = 'My Yii Application';
             <div class="tasks">
                 <div class="fields"></div>
                 <table class="tasks-table table">
-                    <tr class="task" ng-repeat="task in project.tasks">
-                        <td class="checkbox-container">
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            {{task.text}}
-                        </td>
-                        <td class="task-controls">
-                            <a href="#">
-                                    <span class="glyphicon
-                                     glyphicon-resize-vertical"></span>
-                            </a> |
-                            <a href="#">
-                                    <span class="glyphicon
-                                    glyphicon-pencil"></span>
-                            </a> |
-                            <a href="#">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </td>
-                    </tr>
+                    <tbody ui-sortable="sortableOptions" ng-model="project.tasks">
+                        <tr class="task" ng-repeat="task in project.tasks">
+                            <td class="checkbox-container">
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                {{task.text}}
+                            </td>
+                            <td class="task-controls">
+                                <a href="#">
+                                        <span class="glyphicon
+                                         glyphicon-resize-vertical change-priority"></span>
+                                </a> |
+                                <a href="#">
+                                        <span class="glyphicon
+                                        glyphicon-pencil"></span>
+                                </a> |
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
