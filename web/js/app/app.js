@@ -7,7 +7,7 @@ function Projects($scope, $http) {
         });
 
     $scope.add = function() {
-        $http.post('/project', $.param({title: 'new'}))
+        $http.post('/project?expand=tasks', $.param({title: 'new'}))
             .success(function(data, status, headers, config) {
                 $scope.projects.push(data);
             });
@@ -16,7 +16,9 @@ function Projects($scope, $http) {
     $scope.delete = function(project) {
         $http.delete('/project/' + project.id)
             .success(function(data, status, headers, config) {
-                delete project;
+                var index = $scope.projects.indexOf(project);
+
+                $scope.projects.splice(index, 1);
             });
     };
 
@@ -25,6 +27,9 @@ function Projects($scope, $http) {
             project_id: project.id,
             text: project.newTaskText
         })).success(function(data, status, headers, config) {
+            if (!project.hasOwnProperty('tasks'))
+                project.tasks = [];
+
             project.tasks.push(data);
         });
 
