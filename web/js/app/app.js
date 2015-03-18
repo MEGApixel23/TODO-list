@@ -23,6 +23,11 @@ angular.module('garage', ['ui.sortable'])
                 });
         };
 
+        $scope.edit = function(project) {
+            $http.patch('/project/' + project.id, $.param(project))
+                .success(function(data, status, headers, config) {});
+        };
+
         $scope.addTask = function(project) {
             $http.post('/task', $.param({
                 project_id: project.id,
@@ -49,6 +54,11 @@ angular.module('garage', ['ui.sortable'])
 
         $scope.changeTask = function(task) {
             task.done = task.done ? 1 : 0;
+            $http.patch('/task/' + task.id, $.param(task))
+                .success(function(data, status, headers, config) {});
+        };
+
+        $scope.confirmEditTask = function(task) {
             $http.patch('/task/' + task.id, $.param(task))
                 .success(function(data, status, headers, config) {});
         };

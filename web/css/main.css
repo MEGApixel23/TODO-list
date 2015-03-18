@@ -138,3 +138,18 @@ header .title {
     margin: 0 auto;
     width: 117px;
 }
+.task:hover {
+    background-color: rgba(246, 237, 28, 0.15);
+}
+.task .controls-edit {
+    visibility: hidden;
+}
+.task:hover .controls-edit {
+    visibility: visible;
+}
+.project-header .controls-edit-project {
+    visibility: hidden;
+}
+.project-header:hover .controls-edit-project {
+    visibility: visible;
+}

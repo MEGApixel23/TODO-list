@@ -17,17 +17,33 @@ $this->title = 'My Yii Application';
              data-id="{{projectId}}">
             <div class="project-header bg-primary">
                 <div class="glyphicon glyphicon-list-alt project-icon"></div>
-                <div class="project-title">{{project.title}}</div>
+                <div class="project-title">
+                    <span class="project-title-container">
+                        {{project.title}}
+                    </span>
+                    <span class="change-title-container" hidden>
+                        <input type="text" ng-model="project.title"
+                               value="{{project.title}}"
+                               style="color: black">
+                    </span>
+                </div>
                 <div class="project-controls pull-right" role="controls">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a> |
-                    <a href="#"
-                       ng-click="delete(project)"
-                       onclick="return false;"
-                       class="delete-project">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </a>
+                    <div class="controls-edit-project">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-pencil edit-project"></span>
+                        </a> |
+                        <a href="#"
+                           ng-click="delete(project)"
+                           onclick="return false;"
+                           class="delete-project">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                    <div class="controls-confirm-project" hidden>
+                        <a href="#" ng-click="edit(project)">
+                            <span class="glyphicon glyphicon-ok confirm-project"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="project-creator">
@@ -63,20 +79,30 @@ $this->title = 'My Yii Application';
                                     ng-click="changeTask(task)">
                             </td>
                             <td>
-                                {{task.text}}
+                                <div class="task-text">{{task.text}}</div>
+                                <input type="text" class="task-text-input" hidden
+                                       ng-model="task.text"
+                                       value="{{task.text}}"
+                                       ng-change="editTask(task)">
                             </td>
                             <td class="task-controls" role="controls">
-                                <a href="#">
-                                        <span class="glyphicon
-                                         glyphicon-resize-vertical change-priority"></span>
-                                </a> |
-                                <a href="#">
-                                        <span class="glyphicon
-                                        glyphicon-pencil"></span>
-                                </a> |
-                                <a href="#" ng-click="deleteTask(task)">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </a>
+                                <div class="controls-edit">
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-resize-vertical change-priority"></span>
+                                    </a> |
+                                    <a href="#">
+                                        <span class="glyphicon glyphicon-pencil edit-task"></span>
+                                    </a> |
+                                    <a href="#" ng-click="deleteTask(task)">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </a>
+                                </div>
+                                <div class="controls-confirm" style="text-align: center" hidden>
+                                    <a href="#" class="confirm-edit" ng-click="confirmEditTask(task)">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </a>
+                                </div>
+
                             </td>
                         </tr>
                     </tbody>

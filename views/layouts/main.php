@@ -33,17 +33,7 @@ AngularJsAsset::register($this);
         <div class="title">Simple TODO list</div>
     </header>
 
-    <div class="menu">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">Profile</a></li>
-            <li role="presentation"><a href="#">Messages</a></li>
-        </ul>
-    </div>
-
-
     <?=$content?>
-    </div>
 
     <footer>Ruby garage</footer>
 </div>
