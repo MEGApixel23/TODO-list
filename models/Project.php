@@ -67,7 +67,7 @@ class Project extends \yii\db\ActiveRecord implements Linkable
     {
         return $this->hasMany(Task::className(), ['project_id' => 'id'])->where([
             'deleted' => 0
-        ])->orderBy(['priority' => SORT_DESC]);
+        ])->orderBy(['priority' => SORT_ASC]);
     }
 
     public function extraFields()

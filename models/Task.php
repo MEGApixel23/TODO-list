@@ -77,14 +77,16 @@ class Task extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (!$this->priority) {
-            $lastTask = self::find()->where([
-                'project_id' => $this->project_id
-            ])->orderBy([
-                'priority' => SORT_DESC
-            ])->one();
+        if ($insert) {
+            if (!$this->priority) {
+                $lastTask = self::find()->where([
+                    'project_id' => $this->project_id
+                ])->orderBy([
+                    'priority' => SORT_DESC
+                ])->one();
 
-            $this->priority = isset($lastTask->priority) ? $lastTask->priority + 1 : 0;
+                $this->priority = isset($lastTask->priority) ? $lastTask->priority + 1 : 0;
+            }
         }
 
         return parent::beforeSave($insert);

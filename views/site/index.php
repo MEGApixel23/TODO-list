@@ -53,10 +53,12 @@ $this->title = 'My Yii Application';
             <div class="tasks">
                 <div class="fields"></div>
                 <table class="tasks-table table">
-                    <tbody ui-sortable="sortableOptions" ng-model="project.tasks">
-                        <tr class="task" ng-repeat="task in project.tasks">
+                    <tbody ui-sortable="sortableOptions" ng-model="project.tasks" auto-save>
+                        <tr class="task" ng-repeat="task in project.tasks" auto-save>
                             <td class="checkbox-container">
-                                <input type="checkbox">
+                                <input type="checkbox"
+                                       ng-checked="task.done"
+                                       ng-model="task.done">
                             </td>
                             <td>
                                 {{task.text}}
@@ -70,7 +72,7 @@ $this->title = 'My Yii Application';
                                         <span class="glyphicon
                                         glyphicon-pencil"></span>
                                 </a> |
-                                <a href="#">
+                                <a href="#" ng-click="deleteTask(task)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </td>

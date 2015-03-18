@@ -37,16 +37,47 @@ angular.module('garage', ['ui.sortable'])
             project.newTaskText = null;
         };
 
+        $scope.deleteTask = function(task) {
+            $http.delete('/task/' + task.id)
+                .success(function(data, status, headers, config) {
+                    var project = findProject(task.project_id);
+                    var index = project.tasks.indexOf(task);
+
+                    project.tasks.splice(index, 1);
+                });
+        };
+
+        $scope.changeTask = function(task) {
+            console.log(!!task.done);
+            $http.patch('/task/' + task.id, $.param(task))
+                .success(function(data, status, headers, config) {});
+        };
+
         $scope.sortableOptions = {
             handle: '.change-priority',
             axis: 'y',
-            update: function(e, ui) {
-                var model = ui.item.sortable.model;
-                model.text = 'tetetete';
-                console.log(ui.item.sortable.model);
-            },
             stop: function(e, ui) {
+                var model = ui.item.sortable.model;
+                var project = findProject(model.project_id);
 
+                for (var i=0, priority=0, task; i<project.tasks.length; i++) {
+                    priority = i;
+                    task = project.tasks[i];
+                    project.tasks[i].priority = priority;
+
+                    $http.patch('/task/' + task.id, $.param(task))
+                        .success(function(data, status, headers, config) {});
+                }
             }
         };
+
+        function findProject(projectId) {
+            for (var i=0; i<$scope.projects.length; i++) {
+                if ($scope.projects[i].id == projectId) {
+                    return $scope.projects[i];
+                }
+            }
+
+            return false;
+        }
 });
