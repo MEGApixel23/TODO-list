@@ -18,7 +18,7 @@ $this->title = 'My Yii Application';
             <div class="project-header bg-primary">
                 <div class="glyphicon glyphicon-list-alt project-icon"></div>
                 <div class="project-title">{{project.title}}</div>
-                <div class="project-controls pull-right">
+                <div class="project-controls pull-right" role="controls">
                     <a href="#">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a> |
@@ -32,7 +32,7 @@ $this->title = 'My Yii Application';
             </div>
             <div class="project-creator">
                 <div class="add-task">
-                    <a href="#">
+                    <a href="#" role="controls">
                         <span class="glyphicon glyphicon-plus add-task-icon"></span>
                     </a>
                 </div>
@@ -65,7 +65,7 @@ $this->title = 'My Yii Application';
                             <td>
                                 {{task.text}}
                             </td>
-                            <td class="task-controls">
+                            <td class="task-controls" role="controls">
                                 <a href="#">
                                         <span class="glyphicon
                                          glyphicon-resize-vertical change-priority"></span>
@@ -93,3 +93,4 @@ $this->title = 'My Yii Application';
 </div>
 
 <? $this->registerJsFile('/js/app/app.js')?>
+<? $this->registerJsFile('/js/script.js')?>
