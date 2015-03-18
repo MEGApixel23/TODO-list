@@ -35,7 +35,7 @@ AngularJsAsset::register($this);
 
     <?=$content?>
 
-    <footer>Ruby garage</footer>
+    <footer class="pull-bottom">Ruby garage</footer>
 </div>
 <?php $this->endBody() ?>
 </body>
