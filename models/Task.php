@@ -36,7 +36,8 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             [['project_id', 'user_id', 'text'], 'required'],
-            [['project_id', 'user_id', 'deleted', 'priority', 'done'], 'integer'],
+            [['project_id', 'user_id', 'deleted', 'priority'], 'integer'],
+            [['done'], 'boolean'],
             [['text'], 'string'],
             [['timestamp_create', 'timestamp_update'], 'safe']
         ];
@@ -72,7 +73,17 @@ class Task extends \yii\db\ActiveRecord
         if (!$this->user_id)
             $this->user_id = 0;
 
+        $this->done = (bool) $this->done;
+
         return parent::beforeValidate();
+    }
+
+    public function afterFind()
+    {
+        if ($this->done !== null) {
+            $this->done = (bool) $this->done;
+        }
+        return parent::afterFind();
     }
 
     public function beforeSave($insert)

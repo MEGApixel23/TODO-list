@@ -57,8 +57,10 @@ $this->title = 'My Yii Application';
                         <tr class="task" ng-repeat="task in project.tasks" auto-save>
                             <td class="checkbox-container">
                                 <input type="checkbox"
-                                       ng-checked="task.done"
-                                       ng-model="task.done">
+                                    class="done-checkbox"
+                                    ng-checked="task.done"
+                                    ng-model="task.done"
+                                    ng-click="changeTask(task)">
                             </td>
                             <td>
                                 {{task.text}}

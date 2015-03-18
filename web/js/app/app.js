@@ -48,7 +48,7 @@ angular.module('garage', ['ui.sortable'])
         };
 
         $scope.changeTask = function(task) {
-            console.log(!!task.done);
+            task.done = task.done ? 1 : 0;
             $http.patch('/task/' + task.id, $.param(task))
                 .success(function(data, status, headers, config) {});
         };
